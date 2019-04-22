@@ -2,11 +2,13 @@
 
 namespace {{namespace}}Http\Controllers\Teamwork;
 
+use App\User;
+use App\Team;
 use Illuminate\Http\Request;
+use Mpociot\Teamwork\TeamInvite;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
-use Mpociot\Teamwork\TeamInvite;
 
 class AuthController extends Controller
 {
@@ -19,8 +21,11 @@ class AuthController extends Controller
     public function acceptInvite($token)
     {
         $invite = Teamwork::getInviteFromAcceptToken($token);
+
         if (!$invite) {
-            abort(404);
+            $message = "Your invitation is either expired or invalid, please ask the team owner to send you a new invitation.";
+            return view('errors.error', compact('message'));
+            //abort(404);
         }
 
         if (auth()->check()) {
@@ -28,8 +33,25 @@ class AuthController extends Controller
             return redirect()->route('teams.index');
         } else {
             session(['invite_token' => $token]);
-            return redirect()->to('login');
+            $invitation = [
+                'team_name' => Team::find($invite->team_id)->name,
+                'sender_name' => User::find($invite->user_id)->name,
+            ];
+            return view('teamwork.invitation', compact('invitation'));
         }
+    }
+
+    public function declineInvite($token)
+    {
+        $invite = Teamwork::getInviteFromAcceptToken($token);
+
+        if (!$invite) {
+            $message = "Your invitation link is either expired or invalid, please ask the team owner to send you a new invitation.";
+        } else {
+            Teamwork::denyInvite($invite);
+            $message = "The invitation has been declined";
+        }
+        return view('errors.error', compact('message'));
     }
 
 }

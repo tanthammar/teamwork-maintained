@@ -23,9 +23,10 @@ class MakeTeamwork extends Command
      * @var string
      */
     protected $description = 'Create Teamwork scaffolding files.';
-    
+
     protected $views = [
         'emails/invite.blade.php' => 'teamwork/emails/invite.blade.php',
+        'emails/invitation.blade.php' => 'teamwork/emails/invitation.blade.php',
         'members/list.blade.php' => 'teamwork/members/list.blade.php',
         'create.blade.php' => 'teamwork/create.blade.php',
         'edit.blade.php' => 'teamwork/edit.blade.php',
@@ -52,7 +53,7 @@ class MakeTeamwork extends Command
         $this->createDirectories();
 
         $this->exportViews();
-        
+
         if (! $this->option('views')) {
             $this->info('Installed TeamController.');
             file_put_contents(
@@ -101,6 +102,9 @@ class MakeTeamwork extends Command
                 app_path('Team.php'),
                 $this->compileModelStub('Team')
             );
+
+            $this->info('Installed Invitation Mail.');
+            copy(__DIR__ . '/../../../stubs/mail/TeamworkMemberInvitation.php', app_path('Mail'));
         }
         $this->comment('Teamwork scaffolding generated successfully!');
     }
@@ -123,6 +127,9 @@ class MakeTeamwork extends Command
         }
         if (! is_dir(app_path('Models'))) {
             mkdir(app_path('Models'), 0755, true);
+        }
+        if (!is_dir(app_path('Mail'))) {
+            mkdir(app_path('Mail'), 0755, true);
         }
         if (! is_dir(base_path('resources/views/teamwork'))) {
             mkdir(base_path('resources/views/teamwork'), 0755, true);
