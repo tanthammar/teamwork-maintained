@@ -98,7 +98,7 @@ class MakeTeamwork extends Command
 
             $this->info('Installed Team Model.');
             file_put_contents(
-                app_path('Models/Team.php'),
+                app_path('Team.php'),
                 $this->compileModelStub('Team')
             );
         }
