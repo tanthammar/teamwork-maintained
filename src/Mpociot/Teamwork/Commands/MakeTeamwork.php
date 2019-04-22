@@ -104,7 +104,7 @@ class MakeTeamwork extends Command
             );
 
             $this->info('Installed Invitation Mail.');
-            copy(__DIR__ . '/../../../stubs/mail/TeamworkMemberInvitation.php', app_path('Mail'));
+            copy(__DIR__ . '/../../../stubs/mail/TeamworkMemberInvitation.php', app_path('Mail/TeamworkMemberInvitation.php'));
         }
         $this->comment('Teamwork scaffolding generated successfully!');
     }
