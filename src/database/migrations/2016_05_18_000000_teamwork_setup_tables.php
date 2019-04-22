@@ -26,6 +26,7 @@ class TeamworkSetupTables extends Migration
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->string('name')->unique();
             $table->string( 'slug' )->unique();
+            $table->text('photo_url')->nullable();
             $table->timestamps();
         } );
 
