@@ -17,7 +17,7 @@ class TeamInvite extends Model
      */
     protected $table;
 
-    protected constant $uuid_prefix = 'tmi-';
+    const UUID_PREFIX = 'tmi-';
 
     /**
      * Creates a new instance of the model.
