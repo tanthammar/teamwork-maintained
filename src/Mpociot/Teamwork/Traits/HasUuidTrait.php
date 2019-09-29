@@ -3,6 +3,7 @@
 namespace Mpociot\Teamwork\Traits;
 
 use Hidehalo\Nanoid\Client;
+
 /**
  * Source: https://github.com/jamesmills/eloquent-uuid
  * added suffix
