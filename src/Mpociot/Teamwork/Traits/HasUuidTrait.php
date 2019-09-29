@@ -2,7 +2,7 @@
 
 namespace Mpociot\Teamwork\Traits;
 
-use Illuminate\Support\Str;
+use Hidehalo\Nanoid\Client;
 /**
  * Source: https://github.com/jamesmills/eloquent-uuid
  * added suffix
@@ -13,8 +13,9 @@ trait HasUuidTrait
     {
         static::creating(function ($model) {
             if (!$model->uuid) {
+                $client = new Client();
+                $uuid = $client->generateId(21);
                 $prefix = self::UUID_PREFIX ?? false;
-                $uuid = Str::orderedUuid();
                 if ($prefix) {
                     $model->uuid = (string) $prefix . $uuid;
                 } else {

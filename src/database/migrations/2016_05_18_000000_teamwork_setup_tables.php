@@ -20,17 +20,19 @@ class TeamworkSetupTables extends Migration
 
 
         Schema::create(\Config::get('teamwork.teams_table'), function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->bigIncrements('id');
+            $table->string('uuid')->nullable()->unique()->index()->after('id');
+            $table->unsignedBigInteger('owner_id')->nullable()->index();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->text('photo_url')->nullable();
             $table->json('meta')->nullable();
             $table->timestamps();
         });
 
         Schema::create(\Config::get('teamwork.team_user_table'), function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('team_id');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('team_id')->index();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -47,8 +49,9 @@ class TeamworkSetupTables extends Migration
 
         Schema::create(\Config::get('teamwork.team_invites_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('team_id');
+            $table->string('uuid')->nullable()->unique()->index()->after('id');
+            $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('team_id')->nullable()->index();
             $table->enum('type', ['invite', 'request']);
             $table->string('email');
             $table->string('accept_token');
