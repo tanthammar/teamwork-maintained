@@ -21,7 +21,7 @@ trait UsedByTeams
     /**
      * Boot the global scope
      */
-    protected static function bootUsedByTeams()
+    /* protected static function bootUsedByTeams()
     {
         static::addGlobalScope('team', function (Builder $builder) {
             static::teamGuard();
@@ -36,7 +36,7 @@ trait UsedByTeams
                 $model->team_id = auth()->user()->current_team_id;
             }
         });
-    }
+    } */
 
     /**
      * @param Builder $query

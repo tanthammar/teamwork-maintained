@@ -1,5 +1,6 @@
 <?php namespace Mpociot\Teamwork;
 
+use Mpociot\Teamwork\Traits\HasUuidTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Mpociot\Teamwork\Traits\TeamworkTeamInviteTrait;
@@ -7,7 +8,7 @@ use Mpociot\Teamwork\Traits\TeamworkTeamInviteTrait;
 
 class TeamInvite extends Model
 {
-    use TeamworkTeamInviteTrait;
+    use TeamworkTeamInviteTrait, HasUuidTrait;
 
     /**
      * The database table used by the model.
@@ -15,6 +16,8 @@ class TeamInvite extends Model
      * @var string
      */
     protected $table;
+
+    protected constant $uuid_prefix = 'tmi-';
 
     /**
      * Creates a new instance of the model.

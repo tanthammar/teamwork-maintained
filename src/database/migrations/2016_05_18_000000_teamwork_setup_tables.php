@@ -42,7 +42,7 @@ class TeamworkSetupTables extends Migration
             $table->foreign('team_id')
                 ->references('id')
                 ->on(\Config::get('teamwork.teams_table'))
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::create(\Config::get('teamwork.team_invites_table'), function (Blueprint $table) {
@@ -57,10 +57,10 @@ class TeamworkSetupTables extends Migration
             $table->foreign('team_id')
                 ->references('id')
                 ->on(\Config::get('teamwork.teams_table'))
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')
                 ->references('id')->on('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
