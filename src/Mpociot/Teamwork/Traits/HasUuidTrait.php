@@ -16,7 +16,7 @@ trait HasUuidTrait
             if (!$model->uuid) {
                 $client = new Client();
                 $uuid = $client->generateId(21);
-                $prefix = self::UUID_PREFIX ?? false;
+                $prefix = $model::UUID_PREFIX ?? false;
                 if ($prefix) {
                     $model->uuid = (string) $prefix . $uuid;
                 } else {
