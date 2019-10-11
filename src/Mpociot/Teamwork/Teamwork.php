@@ -38,7 +38,7 @@ class Teamwork
     }
 
     /**
-     * Invite an email adress to a team.
+     * Invite an email address to a team.
      * Either provide a email address or an object with an email property.
      *
      * If no team is given, the current_team_id will be used instead.
