@@ -21,7 +21,7 @@ class TeamworkSetupTables extends Migration
 
         Schema::create(\Config::get('teamwork.teams_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->nullable()->unique()->index()->after('id');
+            $table->string('uuid')->nullable()->unique();
             $table->unsignedBigInteger('owner_id')->nullable()->index();
             $table->string('name')->unique();
             $table->string('slug')->unique();
@@ -49,7 +49,7 @@ class TeamworkSetupTables extends Migration
 
         Schema::create(\Config::get('teamwork.team_invites_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->nullable()->unique()->index()->after('id');
+            $table->string('uuid')->nullable()->unique();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->unsignedBigInteger('team_id')->nullable()->index();
             $table->enum('type', ['invite', 'request']);
