@@ -31,8 +31,9 @@ class TeamworkSetupTables extends Migration
         });
 
         Schema::create(\Config::get('teamwork.team_user_table'), function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('team_id')->index();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('team_id');
+            $table->string('role', 20);
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -45,6 +46,8 @@ class TeamworkSetupTables extends Migration
                 ->references('id')
                 ->on(\Config::get('teamwork.teams_table'))
                 ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unique(['team_id', 'user_id']);
         });
 
         Schema::create(\Config::get('teamwork.team_invites_table'), function (Blueprint $table) {

@@ -63,7 +63,7 @@ return [
     | database.
     |
     */
-    'team_user_table' => 'team_user',
+    'team_user_table' => 'team_users',
 
     /*
     |--------------------------------------------------------------------------
