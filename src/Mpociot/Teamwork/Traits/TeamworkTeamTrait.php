@@ -21,7 +21,7 @@ trait TeamworkTeamTrait
     {
         return $this->hasMany( Config::get('teamwork.invite_model'), 'team_id', 'id');
     }
-    
+
     /**
      * Many-to-Many relations with the user model.
      *
@@ -29,7 +29,12 @@ trait TeamworkTeamTrait
      */
     public function users()
     {
-        return $this->belongsToMany(Config::get('teamwork.user_model'), Config::get('teamwork.team_user_table'), 'team_id','user_id')->withTimestamps();
+        return $this->belongsToMany(
+            Config::get('teamwork.user_model'),
+            Config::get('teamwork.team_user_table'), 'team_id','user_id')
+            ->withPivot('role')
+            ->withTimestamps()
+            ->orderBy('name', 'asc');
     }
 
     /**

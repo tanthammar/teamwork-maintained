@@ -23,7 +23,12 @@ trait UserHasTeams
      */
     public function teams()
     {
-        return $this->belongsToMany( Config::get( 'teamwork.team_model' ),Config::get( 'teamwork.team_user_table' ), 'user_id', 'team_id' )->withTimestamps();
+        return $this->belongsToMany(
+            Config::get( 'teamwork.team_model' ),
+            Config::get( 'teamwork.team_user_table' ), 'user_id', 'team_id' )
+            ->withPivot(['role'])
+            ->withTimestamps()
+            ->orderBy('name', 'asc');
     }
 
     /**
@@ -150,7 +155,7 @@ trait UserHasTeams
             }
 
         }
-        
+
         // Reload relation
         $this->load('teams');
 
@@ -183,7 +188,7 @@ trait UserHasTeams
         if( $this->relationLoaded('teams') ) {
             $this->load('teams');
         }
-        
+
         /**
          * If the user has no more teams,
          * unset the current_team_id
@@ -265,7 +270,7 @@ trait UserHasTeams
         if( $this->relationLoaded('currentTeam') ) {
             $this->load('currentTeam');
         }
-        
+
         return $this;
     }
 }
