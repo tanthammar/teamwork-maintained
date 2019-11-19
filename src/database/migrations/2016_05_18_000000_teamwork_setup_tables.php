@@ -33,7 +33,7 @@ class TeamworkSetupTables extends Migration
         Schema::create(\Config::get('teamwork.team_user_table'), function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('team_id');
-            $table->string('role', 20);
+            $table->string('role', 20)->default('owner');
             $table->timestamps();
 
             $table->foreign('user_id')
