@@ -82,8 +82,8 @@ class TeamworkSetupTables extends Migration
         });
 
         Schema::table(\Config::get('teamwork.team_user_table'), function (Blueprint $table) {
-            $table->dropForeign(\Config::get('teamwork.team_user_table') . '_user_id_foreign');
-            $table->dropForeign(\Config::get('teamwork.team_user_table') . '_team_id_foreign');
+            $table->dropForeign(\Config::get('teamwork.team_user_table').'_user_id_foreign');
+            $table->dropForeign(\Config::get('teamwork.team_user_table').'_team_id_foreign');
         });
 
         Schema::drop(\Config::get('teamwork.team_user_table'));

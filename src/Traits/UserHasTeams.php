@@ -85,8 +85,12 @@ trait UserHasTeams
      */
     public function isOwner()
     {
-        return ( $this->teams()->where( "owner_id", "=", $this->getKey() )->first() ) ? true : false;
-    }
+	    $CurrentTeam=$this->currentTeam['id'];
+		return ( $this->teams()
+			->where('id',$CurrentTeam)
+			->where( "owner_id", "=", $this->getKey() )
+			->first() ) ? true : false;
+	}
 
     /**
      * Wrapper method for "isOwner"
@@ -155,7 +159,7 @@ trait UserHasTeams
             }
 
         }
-
+        
         // Reload relation
         $this->load('teams');
 
@@ -188,7 +192,7 @@ trait UserHasTeams
         if( $this->relationLoaded('teams') ) {
             $this->load('teams');
         }
-
+        
         /**
          * If the user has no more teams,
          * unset the current_team_id
@@ -270,7 +274,7 @@ trait UserHasTeams
         if( $this->relationLoaded('currentTeam') ) {
             $this->load('currentTeam');
         }
-
+        
         return $this;
     }
 }

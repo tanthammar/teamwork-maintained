@@ -1,4 +1,6 @@
-<?php namespace Mpociot\Teamwork;
+<?php 
+
+namespace Mpociot\Teamwork;
 
 /**
  * This file is part of Teamwork

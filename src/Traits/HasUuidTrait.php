@@ -31,6 +31,11 @@ trait HasUuidTrait
         return self::whereUuid($uuid)->firstOrFail();
     }
 
+    public static function findByUuid($uuid)
+    {
+        return self::whereUuid($uuid)->first();
+    }
+    
     /**
      * Eloquent scope to look for a given UUID
      *

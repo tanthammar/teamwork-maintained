@@ -1,4 +1,6 @@
-<?php namespace Mpociot\Teamwork;
+<?php 
+
+namespace Mpociot\Teamwork;
 
 use Illuminate\Support\Facades\Config;
 use Mpociot\Teamwork\Events\UserInvitedToTeam;
